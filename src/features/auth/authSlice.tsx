@@ -15,7 +15,7 @@ export const fetchAsyncLogin = createAsyncThunk(
     "auth/login",
     async (auth: CRED) => {
         const res = await axios.post<JWT>(
-            `${process.env.REACT_APP_API_URL}/authen/jwt/create`, auth, {
+            `${process.env.REACT_APP_API_URL}/authen/jwt/create/`, auth, {
                 headers: {
                     "Content-Type": "application/json",
                 }
@@ -29,7 +29,7 @@ export const fetchAsyncRegister = createAsyncThunk(
     "auth/register",
     async (auth: CRED) => {
         const res = await axios.post<USER>(
-            `${process.env.REACT_APP_API_URL}/api/create`, auth, {
+            `${process.env.REACT_APP_API_URL}/api/create/`, auth, {
                 headers: {
                     "Content-Type": "application/json",
                 }
@@ -89,7 +89,7 @@ export const fetchAsyncUpdateProfile = createAsyncThunk(
         profile.img && uploadData.append("img", profile.img, profile.img.name)
 
         const res = await axios.post<PROFILE>(
-            `${process.env.REACT_APP_API_URL}/api/profile/${profile.id}`, uploadData, {
+            `${process.env.REACT_APP_API_URL}/api/profile/${profile.id}/`, uploadData, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `JWT ${localStorage.localJWT}`,

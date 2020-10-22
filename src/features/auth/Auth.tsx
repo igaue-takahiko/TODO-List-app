@@ -5,7 +5,6 @@ import {
     Theme,
     TextField,
     Button,
-    Typography,
 } from '@material-ui/core'
 
 import styles from './Auth.module.css'
@@ -50,7 +49,7 @@ const Auth: React.FC = () => {
 
     return (
         <div className={styles.auth__root}>
-            <Typography variant="h1">{isLoginView ? "Login" : "Register"}</Typography>
+            <h1>{isLoginView ? "Login" : "Register"}</h1>
             <br/>
             <TextField
                 type="text" name="username" label="Username"
