@@ -88,7 +88,7 @@ export const fetchAsyncUpdateProfile = createAsyncThunk(
         const uploadData = new FormData()
         profile.img && uploadData.append("img", profile.img, profile.img.name)
 
-        const res = await axios.post<PROFILE>(
+        const res = await axios.put<PROFILE>(
             `${process.env.REACT_APP_API_URL}/api/profile/${profile.id}/`, uploadData, {
                 headers: {
                     "Content-Type": "application/json",
