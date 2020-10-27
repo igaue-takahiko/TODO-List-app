@@ -68,7 +68,7 @@ export const fetchAsyncCreateCategory = createAsyncThunk(
 export const fetchAsyncCreateTask = createAsyncThunk(
     "task/createTask",
     async (task: POST_TASK) => {
-        const res = await axios.post<CATEGORY>(
+        const res = await axios.post<READ_TASK>(
                 `${process.env.REACT_APP_API_URL}/api/tasks/`, task, {
                 headers: {
                     "Content-Type": "application/json",
@@ -83,7 +83,7 @@ export const fetchAsyncCreateTask = createAsyncThunk(
 export const fetchAsyncUpdateTask = createAsyncThunk(
     "task/updateTask",
     async (task: POST_TASK) => {
-        const res = await axios.post<READ_TASK>(
+        const res = await axios.put<READ_TASK>(
                 `${process.env.REACT_APP_API_URL}/api/tasks/${task.id}/`, task, {
                 headers: {
                     "Content-Type": "application/json",
@@ -220,6 +220,18 @@ export const taskSlice = createSlice({
         )
         builder.addCase(fetchAsyncCreateCategory.rejected, () => {
             window.location.href = "/"
+        })
+        builder.addCase(fetchAsyncCreateTask.fulfilled,
+            (state, action: PayloadAction<READ_TASK>) => {
+                return {
+                    ...state,
+                    tasks: [ action.payload, ...state.tasks ],
+                    editedTask: initialState.editedTask,
+                };
+            }
+        );
+        builder.addCase(fetchAsyncCreateTask.rejected, () => {
+            window.location.href = "/";
         })
         builder.addCase(fetchAsyncUpdateTask.fulfilled,
             (state, action: PayloadAction<READ_TASK>) => {
